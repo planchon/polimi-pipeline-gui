@@ -22,6 +22,8 @@ Download the weight for the differents neural networks.
  - `vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5` from polimi pipeline
  - `ImgMemeWeights.h5` from polimi pipeline
 
+put them in the `data/models` folder.
+
 pipeline link : https://gitlab.iiia.csic.es/crowd4sdg/polimipipeline/
 
 ### get your twitter credentials
