@@ -1,0 +1,36 @@
+form {
+    input {
+        margin:1px;
+        width: 50%;
+        padding: 5px;
+    }
+}
+
+div {
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 10% 80%;
+    align-items: center;
+}
+
+.console {
+    background-color: black;
+    color: white;
+    width: 90%;
+    height: 400px;
+    padding-bottom: 20px;   
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px;
+}
+
+.tweet {
+    padding-bottom: 20px;
+}
+
+img {
+    height: 200px;
+}
