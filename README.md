@@ -12,7 +12,7 @@ npm start
 ```
 
 #### Back-end (`webserver` folder)
-The back run on : Flask, Websockets, Pandas, SQLlite3, Keras and Tensorflow.
+The back run on : Flask, Websockets, Pandas, SQLlite3, Keras and Tensorflow, PyTorch and Torchvision.
 ```
 pip3 install flask pandas flask_socketio flask_cors keras tensorflow sqlite3
 ```
