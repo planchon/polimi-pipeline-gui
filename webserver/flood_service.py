@@ -52,7 +52,7 @@ class FloodService(Service):
         model.add(tf.keras.layers.GlobalAveragePooling2D())
         model.add(tf.keras.layers.Dense(units=2, activation='softmax'))
         self.model = model
-        self.model.load_weights('data/models/wg/may5')
+        self.model.load_weights('data/models/flood-model/may5')
 
 
     def classify(self, pil_image):
