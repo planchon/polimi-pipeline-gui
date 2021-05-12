@@ -12,7 +12,7 @@ npm start
 ```
 
 #### Back-end (`webserver` folder)
-The back run on : Flask, Websockets, Pandas, SQLlite3, Keras and Tensorflow.
+The back run on : Flask, Websockets, Pandas, SQLlite3, Keras and Tensorflow, **PyTorch and Torchvision**.
 ```
 pip3 install flask pandas flask_socketio flask_cors keras tensorflow sqlite3
 ```
@@ -21,6 +21,7 @@ pip3 install flask pandas flask_socketio flask_cors keras tensorflow sqlite3
 Download the weight for the differents neural networks.
  - `vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5` from polimi pipeline
  - `ImgMemeWeights.h5` from polimi pipeline
+ - `flood-model` tmp from https://drive.google.com/file/d/1iPaDsYYcvIj0FUAgFZ0kJ1JxC-wI3bAr/view?usp=sharing
 
 put them in the `data/models` folder.
 

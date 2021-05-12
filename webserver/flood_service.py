@@ -4,12 +4,15 @@ import numpy as np
 from keras.applications import VGG19
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Activation
+import tensorflow
+from tensorflow.keras.applications.xception import preprocess_input
 from PIL import Image
 import json
+import tensorflow as tf
 
-class MemeService(Service):
+class FloodService(Service):
     def run(self, images):
-        self.send("Launching the MEME model", type="info")
+        self.send("Launching the Flood model", type="info")
         res = []
         tmp = []
         for img in images:
@@ -35,36 +38,31 @@ class MemeService(Service):
 
             self.send("Image {} processed: result {}, proba: {}".format(iid, result[0], result[1]))
 
-        self.send("MEME model finished", type="info")
+        self.send("Flood model finished", type="info")
 
     def setup(self):
-        model_vgg19 = VGG19(include_top=False, weights='imagenet' , input_shape=(150, 150, 3))
-        # copy vgg19 layers into our model
-        self.model = Sequential()
-        for layer in model_vgg19.layers:
-            self.model.add(layer)
+        xception = tf.keras.applications.Xception(include_top=False,
+                                                  weights='imagenet',
+                                                  input_shape=(512, 512, 3))
 
-        # freezing vgg19 layers (saving its original weights)
-        for i in self.model.layers:
-            i.trainable = False
+        xception.trainable = False
 
-        self.model.add(Flatten())
-        self.model.add(Dense(10))
-        self.model.add(Activation('relu'))
-        self.model.add(Dense(2, activation='softmax'))
+        model = tf.keras.Sequential()
+        model.add(xception)
+        model.add(tf.keras.layers.GlobalAveragePooling2D())
+        model.add(tf.keras.layers.Dense(units=2, activation='softmax'))
+        self.model = model
+        self.model.load_weights('data/models/flood-model/may5')
 
-        self.model.load_weights('data/models/ImgMemeWeights.h5')
 
     def classify(self, pil_image):
-        pil_image = pil_image.resize((150,150))
+        pil_image = pil_image.resize((512, 512))
         img_array = np.array(pil_image)
         img_array = np.expand_dims(img_array, 0)
-        img_array = img_array / 255.
+        img_array = preprocess_input(img_array)
 
         predictions = self.model.predict(img_array)[0]
-        is_image = predictions[0]
-        is_meme = predictions[1]
+        is_flood = predictions[0]
+        not_flood = predictions[1]
 
-
-        # Returns true (prediction < 0.5 ) if image is not a Meme
-        return is_image > is_meme, is_image, None
+        return is_flood > 0.7, is_flood, None

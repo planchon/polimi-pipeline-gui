@@ -15,6 +15,8 @@ from twitter_service import TwitterService
 from folder_service import FolderService
 from meme_service import MemeService
 from visualize_service import VisualizerService
+from flood_service import FloodService
+from private_public_service import PrivatePublicService
 
 from pipeline import Pipeline
 
@@ -29,7 +31,12 @@ sql_data = "./data/db.sqlite"
 
 service_active = []
 
-service_available = [FolderService(id="folder", name="Images from folder"), TwitterService(id="twitter", name="Twitter crawler", db="./data/db.sqlite", table_name="raw_tweets"), MemeService(name="Meme Filter", table_name="memes", id="meme", db="./data/db.sqlite"), VisualizerService(name="Visualizer", id="visu")]
+service_available = [FolderService(id="folder", name="Images from folder"),
+                     TwitterService(id="twitter", name="Twitter crawler", db="./data/db.sqlite", table_name="raw_tweets"),
+                     MemeService(name="Meme Filter", table_name="memes", id="meme", db="./data/db.sqlite"),
+                     FloodService(name="Flood Filter", table_name="flood", id="flood", db="./data/db.sqlite"),
+                     VisualizerService(name="Visualizer", id="visu"),
+                     PrivatePublicService(name="Private Public", id="pp", table_name="pp", db="./data/db.sqlite")]
 
 PIPELINE = Pipeline(service_active, service_available)
 

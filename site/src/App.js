@@ -10,6 +10,8 @@ import NSFW from './modules/nsfw/nsfw';
 import ImageFromFolder from './modules/image_folder/images';
 import MemeFilter from './modules/meme/meme';
 import VisualizerService from './modules/visu/visu';
+import Flood from "./modules/flood/flood";
+import PrivatePublic from "./modules/private_public/private_public";
 
 const getItems = (count, offset = 0) =>
     Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -146,8 +148,14 @@ export default class App extends React.Component {
             <div style={{display: this.state.current_editing == "Meme Filter" ? "inline" : "none"}}>
               <MemeFilter />
             </div>
+            <div style={{display: this.state.current_editing == "Flood Filter" ? "inline" : "none"}}>
+                <Flood />
+            </div>
             <div style={{display: this.state.current_editing == "Visualizer" ? "inline" : "none"}}>
               <VisualizerService />
+            </div>
+            <div style={{display: this.state.current_editing == "Private Public" ? "inline" : "none"}}>
+              <PrivatePublic />
             </div>
           </div>
           <div className="left">
